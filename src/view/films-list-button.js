@@ -1,1 +1,3 @@
-export const createFilmsListButtonTemplate = () => '<button class="films-list__show-more">Show more</button>';
+export const createFilmsListButtonTemplate = () => (`
+  <button class="films-list__show-more">Show more</button>
+`);

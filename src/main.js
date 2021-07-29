@@ -1,21 +1,15 @@
-import {
-  createFilmCardTemplate,
-  createFilmDetailsTemplate,
-  createFilmsListButtonTemplate,
-  createFilmsListTemplate,
-  createFilmsTemplate,
-  createFooterStatisticsTextTemplate,
-  createMainNavigationTemplate,
-  createProfileTemplate,
-  createSortTemplate,
-  createStatisticsTemplate } from './view';
-
-const FILMS_CARD_COUNT = 5;
-const EXTRA_FILMS_CARD_COUNT = 2;
-
-const render = (container, template, place) => {
-  container.insertAdjacentHTML(place, template);
-};
+import { createProfileTemplate } from './view/profile.js';
+import { createMainNavigationTemplate } from './view/main-navigation.js';
+import { createSortTemplate } from './view/sort.js';
+import { createStatisticsTemplate } from './view/statisctics.js';
+import { createFilmsTemplate } from './view/films.js';
+import { createFilmsListTemplate } from './view/films-list.js';
+import { createFilmsListButtonTemplate } from './view/films-list-button.js';
+import { createFilmCardTemplate } from './view/film-card.js';
+import { createFooterStatisticsTextTemplate } from './view/footer-statistics-text.js';
+import { createFilmDetailsTemplate } from './view/film-details.js';
+import { FILMS_CARD_COUNT, EXTRA_FILMS_CARD_COUNT} from './settings.js';
+import { render } from './utils/render.js';
 
 const headerElement = document.querySelector('.header');
 render(headerElement, createProfileTemplate(), 'beforeend');
