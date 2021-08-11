@@ -1,3 +1,3 @@
-export const createFooterStatisticsTextTemplate = () => (`
-  <p>130 291 movies inside</p>
+export const createFooterStatisticsTextTemplate = (movies) => (`
+  <p>${movies.length} movies inside</p>
 `);
