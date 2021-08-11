@@ -13,6 +13,7 @@ import { render } from './utils/render.js';
 import { generateMovie } from './mock/movie.js';
 
 const movies = new Array(FILMS_CARD_COUNT).fill().map(generateMovie);
+console.log(movies);
 
 const headerElement = document.querySelector('.header');
 render(headerElement, createProfileTemplate(), 'beforeend');
@@ -39,7 +40,7 @@ const allFilmsListContainerElement = allFilmsListElement.querySelector('.films-l
 render(allFilmsListElement, createFilmsListButtonTemplate(), 'beforeend');
 
 for (let i = 0; i < FILMS_CARD_COUNT; i++) {
-  render(allFilmsListContainerElement, createFilmCardTemplate(), 'beforeend');
+  render(allFilmsListContainerElement, createFilmCardTemplate(movies[i]), 'beforeend');
 }
 
 render(filmsElement, createFilmsListTemplate('Top rated', true, 'top-rated'), 'beforeend');
@@ -48,7 +49,7 @@ const topRatedFilmsListElement = filmsElement.querySelector('#top-rated');
 const topRatedFilmsListContainerElement = topRatedFilmsListElement.querySelector('.films-list__container');
 
 for (let i = 0; i < EXTRA_FILMS_CARD_COUNT; i++) {
-  render(topRatedFilmsListContainerElement, createFilmCardTemplate(), 'beforeend');
+  render(topRatedFilmsListContainerElement, createFilmCardTemplate(movies[i]), 'beforeend');
 }
 
 render(filmsElement, createFilmsListTemplate('Most commented', true, 'most-commented'), 'beforeend');
@@ -57,7 +58,7 @@ const mostCommentedFilmsListElement = filmsElement.querySelector('#most-commente
 const mostCommentedFilmsListContainerElement = mostCommentedFilmsListElement.querySelector('.films-list__container');
 
 for (let i = 0; i < EXTRA_FILMS_CARD_COUNT; i++) {
-  render(mostCommentedFilmsListContainerElement, createFilmCardTemplate(), 'beforeend');
+  render(mostCommentedFilmsListContainerElement, createFilmCardTemplate(movies[i]), 'beforeend');
 }
 
 // render(footerElement, createFilmDetailsTemplate(), 'afterend');

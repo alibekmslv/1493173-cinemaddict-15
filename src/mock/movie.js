@@ -147,7 +147,12 @@ const allComments = new Array(50).fill().map(generateComment);
 const commentsIds = allComments.map((comment) => comment.id);
 
 const generateComments = () => {
-  const randomCommentsQuantity = getRandomInteger(1, 5);
+  const randomCommentsQuantity = getRandomInteger(0, 5);
+
+  if (!randomCommentsQuantity) {
+    return null;
+  }
+
   const comments = [];
 
   for (let i = 0; i < randomCommentsQuantity; i++) {
