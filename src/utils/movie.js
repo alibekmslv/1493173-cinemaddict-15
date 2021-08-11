@@ -35,3 +35,5 @@ export const getFilmDuration = (runtime) => {
 };
 
 export const isActive = (boolean = false) => boolean;
+
+export const isComments = (comments) => !(!comments || !comments.length);

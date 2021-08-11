@@ -198,4 +198,4 @@ const generateMovie = () => {
   };
 };
 
-export { generateId, generateDescription, generateDate, generateMovie };
+export { generateId, generateDescription, generateDate, generateMovie, allComments };
