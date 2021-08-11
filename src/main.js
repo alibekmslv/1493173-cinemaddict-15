@@ -7,9 +7,12 @@ import { createFilmsListTemplate } from './view/films-list.js';
 import { createFilmsListButtonTemplate } from './view/films-list-button.js';
 import { createFilmCardTemplate } from './view/film-card.js';
 import { createFooterStatisticsTextTemplate } from './view/footer-statistics-text.js';
-import { createFilmDetailsTemplate } from './view/film-details.js';
+// import { createFilmDetailsTemplate } from './view/film-details.js';
 import { FILMS_CARD_COUNT, EXTRA_FILMS_CARD_COUNT} from './settings.js';
 import { render } from './utils/render.js';
+import { generateMovie } from './mock/movie.js';
+
+const movies = new Array(FILMS_CARD_COUNT).fill().map(generateMovie);
 
 const headerElement = document.querySelector('.header');
 render(headerElement, createProfileTemplate(), 'beforeend');
@@ -57,4 +60,4 @@ for (let i = 0; i < EXTRA_FILMS_CARD_COUNT; i++) {
   render(mostCommentedFilmsListContainerElement, createFilmCardTemplate(), 'beforeend');
 }
 
-render(footerElement, createFilmDetailsTemplate(), 'afterend');
+// render(footerElement, createFilmDetailsTemplate(), 'afterend');
