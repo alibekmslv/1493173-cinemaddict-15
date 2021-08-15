@@ -1,5 +1,5 @@
 import { getProfileRating } from '../utils/filter.js';
-import { createElement } from '../utils/render.js';
+import AbstractView from './abstract.js';
 
 const createProfileTemplate = (filters) => (
   `<section class="header__profile profile">
@@ -8,25 +8,13 @@ const createProfileTemplate = (filters) => (
   </section>`
 );
 
-export default class Profile {
+export default class Profile extends AbstractView {
   constructor(filters) {
-    this._elment = null;
+    super();
     this._filters = filters;
   }
 
   getTemplate() {
     return createProfileTemplate(this._filters);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }
