@@ -1,5 +1,6 @@
 import { allComments } from '../mock/movie.js';
 import { getFilmDuration, getHumanizedDate, isActive, isComments } from '../utils/movie.js';
+import { createElement } from '../utils/render.js';
 
 const createFilmDetailsCommentsList = (comments) => (`
 <ul class="film-details__comments-list">
@@ -21,7 +22,7 @@ ${comments.map((comment) => (`
 </ul>
 `);
 
-export const createFilmDetailsTemplate = (movie) => {
+const createFilmDetailsTemplate = (movie) => {
   const { id, comments } = movie;
   const { title, alternativeTitle, totalRating, ageRating, release, poster, director, writers, actors, description, genre, runtime } = movie.filmInfo;
   const { watchlist, alreadyWatched, favorite } = movie.userDetails;
@@ -146,3 +147,26 @@ export const createFilmDetailsTemplate = (movie) => {
     </form>
   </section>`;
 };
+
+export default class FilmDetails {
+  constructor(movie) {
+    this._element = null;
+    this._movie = movie;
+  }
+
+  getTemplate() {
+    return createFilmDetailsTemplate(this._movie);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

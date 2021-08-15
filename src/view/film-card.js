@@ -1,11 +1,12 @@
 import { FILM_CARD_DESCRIPTION_LIMIT } from '../settings.js';
 import { cutString, getCommentsQuantity, getFilmDuration, getHumanizedDate, getMainGenre, isActive } from '../utils/movie.js';
+import { createElement } from '../utils/render.js';
 
 
-export const createFilmCardTemplate = (movie) => {
-  const { id, comments } = movie;
-  const { title, alternativeTitle, totalRating, release, poster, description, genre, runtime } = movie.filmInfo;
-  const { watchlist, alreadyWatched, favorite } = movie.userDetails;
+const createFilmCardTemplate = (film) => {
+  const { id, comments } = film;
+  const { title, alternativeTitle, totalRating, release, poster, description, genre, runtime } = film.filmInfo;
+  const { watchlist, alreadyWatched, favorite } = film.userDetails;
   const activeClassName = 'film-card__controls-item--active';
 
   return `<article class="film-card" data-id="${id}">
@@ -26,3 +27,31 @@ export const createFilmCardTemplate = (movie) => {
     </div>
   </article>`;
 };
+
+export default class FilmCard {
+  constructor(film) {
+    this._element = null;
+    this._film = film;
+  }
+
+  getFilm() {
+    return this._film;
+  }
+
+  getTemplate() {
+    return createFilmCardTemplate(this._film);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+      this._element.$component = this;
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
