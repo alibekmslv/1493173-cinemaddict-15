@@ -1,6 +1,7 @@
 import { getProfileRating } from '../utils/filter.js';
+import { createElement } from '../utils/render.js';
 
-export const createStatisticsTemplate = (filters) => (
+const createStatisticsTemplate = (filters) => (
   `<section class="statistic">
     <p class="statistic__rank">
       Your rank
@@ -48,3 +49,26 @@ export const createStatisticsTemplate = (filters) => (
 
   </section>`
 );
+
+export default class Statistics {
+  constructor(filters) {
+    this._element = null;
+    this._filters = filters;
+  }
+
+  getTemplate() {
+    return createStatisticsTemplate(this._filters);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
