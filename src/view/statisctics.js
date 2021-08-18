@@ -1,5 +1,5 @@
 import { getProfileRating } from '../utils/filter.js';
-import { createElement } from '../utils/render.js';
+import AbstractView from './abstract.js';
 
 const createStatisticsTemplate = (filters) => (
   `<section class="statistic">
@@ -50,25 +50,13 @@ const createStatisticsTemplate = (filters) => (
   </section>`
 );
 
-export default class Statistics {
+export default class Statistics extends AbstractView {
   constructor(filters) {
-    this._element = null;
+    super();
     this._filters = filters;
   }
 
   getTemplate() {
     return createStatisticsTemplate(this._filters);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
   }
 }

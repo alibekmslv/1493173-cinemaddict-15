@@ -1,6 +1,6 @@
 import { allComments } from '../mock/movie.js';
 import { getFilmDuration, getHumanizedDate, isActive, isComments } from '../utils/movie.js';
-import { createElement } from '../utils/render.js';
+import AbstractView from './abstract.js';
 
 const createFilmDetailsCommentsList = (comments) => (`
 <ul class="film-details__comments-list">
@@ -148,25 +148,23 @@ const createFilmDetailsTemplate = (movie) => {
   </section>`;
 };
 
-export default class FilmDetails {
+export default class FilmDetails extends AbstractView {
   constructor(movie) {
-    this._element = null;
+    super();
     this._movie = movie;
+    this._closeButtonClickHandler = this._closeButtonClickHandler.bind(this);
   }
 
   getTemplate() {
     return createFilmDetailsTemplate(this._movie);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
+  _closeButtonClickHandler() {
+    this._callback.closeButtonClick();
   }
 
-  removeElement() {
-    this._element = null;
+  setCloseButtonClickHandler(callback) {
+    this._callback.closeButtonClick = callback;
+    this.getElement().querySelector('.film-details__close-btn').addEventListener('click', this._closeButtonClickHandler);
   }
 }

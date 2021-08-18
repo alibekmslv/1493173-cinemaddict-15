@@ -1,6 +1,6 @@
 import { FILM_CARD_DESCRIPTION_LIMIT } from '../settings.js';
 import { cutString, getCommentsQuantity, getFilmDuration, getHumanizedDate, getMainGenre, isActive } from '../utils/movie.js';
-import { createElement } from '../utils/render.js';
+import AbstractView from './abstract.js';
 
 
 const createFilmCardTemplate = (film) => {
@@ -28,30 +28,28 @@ const createFilmCardTemplate = (film) => {
   </article>`;
 };
 
-export default class FilmCard {
+export default class FilmCard extends AbstractView {
   constructor(film) {
-    this._element = null;
+    super();
     this._film = film;
-  }
-
-  getFilm() {
-    return this._film;
+    this._cardElementsClickHandler = this._cardElementsClickHandler.bind(this);
   }
 
   getTemplate() {
     return createFilmCardTemplate(this._film);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-      this._element.$component = this;
-    }
+  _cardElementsClickHandler(evt) {
+    evt.preventDefault();
+    const contains = (className) => evt.target.classList.contains(className);
 
-    return this._element;
+    if (contains('film-card__title') || contains('film-card__poster') || contains('film-card__comments')) {
+      this._callback.cardElementsClick();
+    }
   }
 
-  removeElement() {
-    this._element = null;
+  setCardElementsClickHandler(callback) {
+    this._callback.cardElementsClick = callback;
+    this.getElement().addEventListener('click', this._cardElementsClickHandler);
   }
 }
